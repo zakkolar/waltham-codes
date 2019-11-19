@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title><%= current_page.data.title || "Middleman" %></title>
+    <%= stylesheet_link_tag "site" %>
+    <%= javascript_include_tag "site" %>
+  </head>
+  <body>
+
+
+  <nav class="nav" role="nav">
+    <input type="checkbox" id="menuToggle">
+    <label for="menuToggle">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </label>
+    <ul>
+      <% sitemap.resources.find_all{|p| !p.data.menu_position.nil?}.sort_by{|p| p.data.menu_position}.each do |r| %>
+        <li <%= "class='active'".html_safe if current_page.path == r.path || current_page.data.menu_parent == r.path %> > <%= link_to r.data.menu_title || r.data.title, "/"+r.path %></li>
+      <% end %>
+    </ul>
+  </nav>
+  <div id="translations">
+    <div id="google_translate_element"></div>
+  </div>
+  <div id="main">
+    <%= yield %>
+  </div>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Nanum+Gothic" rel="stylesheet">
+  <script type="text/javascript">
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+          PLtranslation()
+      }
+  </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+backend:
+  name: git-gateway
+  branch: master
+#publish_mode: editorial_workflow
+media_folder: source/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - folder: "source/"
+    label: Pages
+    label_singular: Page
+    name: pages
+    create: true
+    fields:
+    - label: Title
+      name: title
+      widget: string
+    - label: Menu position
+      name: menu_position
+      widget: number
+    - label: Menu title
+      name: menu_title
+      widget: string
+    - label: Body
+      name: body
+      widget: markdown
+  - name: activity
+    label: Activities
+    label_singular: Activity
+    folder: "source/activity"
+    create: true
+    format: frontmatter
+    extension: ".html.md"
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Body
+        name: body
+        widget: markdown
