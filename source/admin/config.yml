@@ -23,17 +23,3 @@ collections:
     - label: Body
       name: body
       widget: markdown
-  - name: activity
-    label: Activities
-    label_singular: Activity
-    folder: "source/activity"
-    create: true
-    format: frontmatter
-    extension: ".html.md"
-    fields:
-      - label: Title
-        name: title
-        widget: string
-      - label: Body
-        name: body
-        widget: markdown

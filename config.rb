@@ -19,9 +19,6 @@ activate :livereload
 
 activate :minify_html
 
-
-page "activity/*", :layout => :activity_layout
-
 activate :directory_indexes
 
 # With alternative layout
