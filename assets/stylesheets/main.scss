@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Lato&display=swap');
+
+$dark-red: #571616;
+$light-red: #CE5F56;
+
+body{
+  font-family: 'Lato', sans-serif;
+}
+
+
+h1{
+  @extend .f1;
+}
+
+h2{
+  @extend .f2;
+}
+
+h3{
+  @extend .f3;
+}
+
+h4{
+  @extend .f4;
+}
+
+h5{
+  @extend .f5;
+}
+
+h6{
+  @extend .f6
+}
+
+
+nav{
+  @extend .tc, .center, .mt4, .dt;
+  //background-color: $main-color;
+  //border-color: darken($main-color, 20%);
+  .links a{
+    @extend .f3-l, .link, .bg-animate, .black-80, .dib, .pa3, .ph4-l, .red, .dim;
+    //color: $light-red;
+  }
+  img{
+
+  }
+}
+
+.toggle-group{
+  @extend .flex, .flex-wrap, .w-100;
+
+  .toggle-control{
+    @extend .tc, .f6, .grow, .ph3, .pv2, .mb2, .dib, .ba, .b--white, .ma0, .pa0;
+
+    input[type=checkbox]{
+      @extend .dn;
+    }
+
+    &.on{
+      @extend .bg-red,.white;
+    }
+
+    &.off{
+      @extend .bg-washed-red, .gray;
+    }
+
+  }
+
+}
+
+.toggle-choices{
+  @extend .ph3, .pv2, .f6, .ba, .b--black-30, .bg-white, .black;
+  &:disabled{
+    @extend .bg-light-gray, .gray, .b--black-10;
+  }
+}

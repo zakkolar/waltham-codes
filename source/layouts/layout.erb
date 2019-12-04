@@ -8,32 +8,46 @@
     <!-- Use the title from a page's frontmatter if it has one -->
     <title><%= current_page.data.title || "Middleman" %></title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <%= stylesheet_link_tag "site" %>
+
     <%= javascript_include_tag "site" %>
   </head>
-  <body>
+  <body class="center pt3 bl  br bw5-l bw3-m bw3 b--red"></body>
+ <div >
+<%
 
+  links = sitemap.resources.find_all{|p| !p.data.menu_position.nil?}.sort_by{|p| p.data.menu_position}
 
-  <nav class="nav" role="nav">
-    <input type="checkbox" id="menuToggle">
-    <label for="menuToggle">
-      <div class="bar1"></div>
-      <div class="bar2"></div>
-      <div class="bar3"></div>
-    </label>
-    <ul>
-      <% sitemap.resources.find_all{|p| !p.data.menu_position.nil?}.sort_by{|p| p.data.menu_position}.each do |r| %>
-        <li <%= "class='active'".html_safe if current_page.path == r.path || current_page.data.menu_parent == r.path %> > <%= link_to r.data.menu_title || r.data.title, "/"+r.path %></li>
-      <% end %>
-    </ul>
+%>
+
+  <nav role="nav">
+
+    <div class="links dtc v-mid w-40 tr">
+    <% links.slice(0, links.length/2).each do |r| %>
+      <%= link_to r.data.menu_title || r.data.title, "/"+r.path, class: current_page.path == r.path || current_page.data.menu_parent == r.path ? 'active' : ''  %>
+    <% end %>
+    </div>
+  <div class="w-20 tc v-mid dtc">
+    <a href="/" class="dim"><img class="w-80" src="/images/waltham-codes-logo.png" alt="Illustration of a mechanical hawk grasping a computer plug in its talons. A computer screen in the background displays 'Hour of Code' in a series of windows. The border of the image reads 'WHS 2019'"></a>
+  </div>
+
+    <div class="links dtc v-mid w-40 tl">
+
+    <% links.slice(links.length/2, links.length).each do |r| %>
+      <%= link_to r.data.menu_title || r.data.title, "/"+r.path, class: current_page.path == r.path || current_page.data.menu_parent == r.path ? 'active' : ''  %>
+    <% end %>
+
+    </div>
+
   </nav>
   <div id="translations">
     <div id="google_translate_element"></div>
   </div>
-  <div id="main">
-    <%= yield %>
+  <div id="main" class="">
+
+      <%= yield %>
+
   </div>
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Nanum+Gothic" rel="stylesheet">
+ </div>
   <script type="text/javascript">
       function googleTranslateElementInit() {
           new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');

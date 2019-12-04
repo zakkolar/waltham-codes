@@ -1,10 +1,6 @@
-var PLtranslation=function(){
+window.PLtranslation=function(){
     var messages = [
         "Translate &#8226; Traducir &#8226; Traduzir &#8226; Tradwi &#8226; 翻译"
-        // "Selecciona tu idioma para traducir esta página.",
-        // "Selecione seu idioma para traduzir esta página",
-        // "Chwazi lang ou an pou tradwi paj sa a",
-        // "选择您的语言以翻译此页面",
     ]
     var currentMessage = 0;
 

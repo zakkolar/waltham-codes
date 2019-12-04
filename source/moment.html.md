@@ -1,5 +1,5 @@
 ---
-title: Updates
+title: Pictures and Tweets
 menu_position: 15
 ---
 

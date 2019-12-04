@@ -1,12 +1,25 @@
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
-activate :autoprefixer do |prefix|
-  prefix.browsers = "last 2 versions"
-end
+# activate :autoprefixer do |prefix|
+#   prefix.browsers = "last 2 versions"
+# end
 
 # Layouts
 # https://middlemanapp.com/basics/layouts/
+#
+#
+
+set :layout, 'text_layout'
+
+activate :external_pipeline,
+         name: :webpack,
+         command: build? ? 'npm run build' : 'npm run start',
+         source: '.tmp/dist',
+         latency: 1
+
+config[:js_dir] = 'assets/javascripts'
+config[:css_dir] = 'assets/stylesheets'
 
 # Per-page layout changes
 page '/*.xml', layout: false
@@ -20,6 +33,9 @@ activate :livereload
 activate :minify_html
 
 activate :directory_indexes
+
+page 'resources.html', layout: 'resources_layout'
+
 
 # With alternative layout
 # page '/path/to/file.html', layout: 'other_layout'

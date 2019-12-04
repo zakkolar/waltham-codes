@@ -1,0 +1,318 @@
+<% wrap_layout :layout do %>
+  <article class="measure-wide center ph4 ph2-l">
+    <%= yield %>
+  </article>
+
+  <div id="resources" class="ph4 ma0">
+    <div v-if="resources.length>0">
+      <div class="w-30-l fl ph2-l">
+        <h2 class="f3">Grade levels:</h2>
+        <div class="pb2">
+          <button v-on:click.prevent="showAll('grades')" class="toggle-choices" v-bind:disabled="tableFilters.grades.length == gradeChoices.length">Select all</button>
+          <button v-on:click.prevent="hideAll('grades')" class="toggle-choices" v-bind:disabled="tableFilters.grades.length == 0">Deselect all</button>
+        </div>
+        <div class="toggle-group">
+          <label v-for="grade in gradeChoices" class="toggle-control w3 w-10-l" v-bind:class="{'on': tableFilters.grades.includes(grade), 'off':!tableFilters.grades.includes(grade)}">
+            <input type="checkbox"  :value="grade" v-model="tableFilters.grades"> {{grade}}
+          </label>
+        </div>
+
+      </div>
+      <div class="w-20-l fl ph2-l">
+        <h2 class="f3">Experience levels:</h2>
+        <div class="pb2">
+          <button v-on:click.prevent="showAll('experienceLevels')" class="toggle-choices" v-bind:disabled="tableFilters.experienceLevels.length == experienceLevelChoices.length">Select all</button>
+          <button v-on:click.prevent="hideAll('experienceLevels')" class="toggle-choices" v-bind:disabled="tableFilters.experienceLevels.length == 0">Deselect all</button>
+        </div>
+        <div class="toggle-group">
+          <label v-for="level in experienceLevelChoices" class="toggle-control w-100" v-bind:class="{'on': tableFilters.experienceLevels.includes(level), 'off':!tableFilters.experienceLevels.includes(level)}">
+            <input type="checkbox" :value="level" v-model="tableFilters.experienceLevels"> {{level}}
+          </label>
+        </div>
+
+      </div>
+
+
+      <div class="w-50-l fl ph2-l">
+        <h2 class="f3">Devices:</h2>
+        <div class="pb2">
+          <button v-on:click.prevent="showAll('devices')" class="toggle-choices" v-bind:disabled="tableFilters.devices.length == deviceChoices.length">Select all</button>
+          <button v-on:click.prevent="hideAll('devices')" class="toggle-choices" v-bind:disabled="tableFilters.devices.length == 0">Deselect all</button>
+        </div>
+        <div class="toggle-group">
+          <label v-for="device in deviceChoices" class="toggle-control w4" v-bind:class="{'on': tableFilters.devices.includes(device), 'off':!tableFilters.devices.includes(device)}">
+            <input type="checkbox" :value="device" v-model="tableFilters.devices"> {{device}}
+          </label>
+        </div>
+
+
+      </div>
+
+<div class="cb">
+
+
+
+      <transition-group appear name="list-complete" tag="div" class="flex flex-wrap">
+        <div v-for="resource of filteredResources" :key="resource.url" class="list-complete-item bg-white w-100 w-25-l w-40-m fl b--black-10 ba mv2 pa0">
+          <h2 class="tc bg-near-white ph3 pv2 ma0 f3">{{resource.name}}</h2>
+          <div class="pa3 lh-copy">
+            <p>Grades: {{resource.gradeList}}</p>
+            <p>Experience levels: {{resource.experienceLevels | csvToList }}</p>
+            <p>Devices: {{resource.devices | csvToList}}</p>
+            <a @click.prevent="resource.showDescription = !resource.showDescription" href="#">
+              <span v-if="resource.showDescription">Hide</span>
+              <span v-else>Show</span>
+              description
+            </a>
+            <transition name="slide-fade">
+              <p v-if="resource.showDescription">{{resource.description}}</p>
+            </transition>
+
+
+
+
+          </div>
+
+        </div>
+      </transition-group>
+
+</div>
+
+
+    </div>
+    <div v-if="resources.length == 0">
+      Loading resources...
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+
+  <script type="text/javascript">
+
+      var app = new Vue({
+          el: '#resources',
+          data(){
+              return {
+                  CLIENT_ID: '316451142104-92t9huk5ra5odjafn88gso57rsirkoq4.apps.googleusercontent.com',
+                  API_KEY: 'AIzaSyCVT_DDFhEN5AuqgzEzfIb0kjCb0CcXOoM',
+                  SPREADSHEET_ID: '1hkGAHnEjyvnjeSgFTBwBNT4SajbnkbAGd5LqFSqJ_g8',
+                  SHEET_RANGE: 'Resources!A2:G',
+                  resources: [],
+                  experienceLevelChoices: ["Beginner", "Intermediate", "Advanced"],
+                  tableFilters: {
+                      experienceLevels: [],
+                      grades: [],
+                      devices: []
+                  }
+              }
+          },
+          mounted(){
+              let script = document.createElement('script');
+              script.src = 'https://apis.google.com/js/api.js';
+              script.addEventListener('load',()=>{
+                  this.setup();
+              })
+              document.body.appendChild(script);
+          },
+
+          filters: {
+              csvToList: function (value) {
+                  return value.join(", ");
+              }
+          },
+
+          computed:{
+
+              gradeChoices(){
+                  let grades = this.getUniquePropertyValues(this.resources, 'grades');
+                  return grades.sort((a,b)=>{
+                      if(typeof a == "number" && typeof b == "string"){
+                          return -1;
+                      }
+                      if(typeof a == "string" && typeof b == "number"){
+                          return 1;
+                      }
+
+                      if(parseInt(a) && parseInt(b)){
+                          return a - b;
+                      }
+
+                      return a>b ? 1:0;
+
+                  });
+              },
+
+              deviceChoices(){
+                  let devices = this.getUniquePropertyValues(this.resources, 'devices');
+                  return devices.sort();
+              },
+
+              filteredResources(){
+                  let resources = this.resources;
+                  const filters = this.tableFilters;
+
+                  for(let filter of Object.keys(filters)){
+                      if(filters[filter].length > 0) {
+                          resources = resources.filter((resource) => {
+                              let show = false;
+                              for (let filterValue of filters[filter]) {
+                                  if (resource[filter].includes(filterValue)) {
+                                      show = true;
+                                  }
+                              }
+                              return show;
+                          });
+
+                      }
+
+
+                  }
+
+
+
+                  return resources;
+              }
+          },
+          methods:{
+
+              showAll:function(type){
+                  this.hideAll(type);
+                  let choices;
+                  switch(type){
+                      case 'grades':
+                          choices = this.gradeChoices;
+                          break;
+                      case 'devices':
+                          choices = this.deviceChoices;
+                          break;
+                      default:
+                          choices = this.experienceLevelChoices;
+                  }
+                  for(let choice of choices){
+                      this.tableFilters[type].push(choice);
+                  }
+              },
+
+              hideAll:function(type){
+                  this.tableFilters[type].splice(0);
+              },
+
+              getUniquePropertyValues(list, prop){
+                  let values = [];
+                  for(let item of list){
+                      for(let i of item[prop]){
+                          if(!values.includes(i)){
+                              values.push(i);
+                          }
+                      }
+                  }
+                  return values;
+              },
+
+              setup(){
+
+                  this.authorize(this.loadResources)
+              },
+
+              authorize(cb){
+                  gapi.load('client:auth2', ()=>{
+
+                      gapi.client.init({
+                          apiKey: this.API_KEY,
+                          clientId: this.CLIENT_ID,
+                          discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+                          scope: "https://www.googleapis.com/auth/spreadsheets.readonly",
+                      }).then(()=>{
+                          if(cb){
+                              cb();
+                          }
+                      })
+                  });
+              },
+
+              camelCase(str) {
+                  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+                      return index == 0 ? word.toLowerCase() : word.toUpperCase();
+                  }).replace(/\s+/g, '');
+              },
+
+              makeCSV(string){
+                  if(!string){
+                      return []
+                  }
+
+                  if(string.indexOf('+')>-1){
+                      string = string.split('+')[0]+"-12";
+                  }
+
+                  if(string.indexOf('-')>-1){
+
+                      const csv = [];
+
+                      let start = string.split('-')[0].toUpperCase();
+                      const end = parseInt(string.split('-')[1]);
+
+                      if(start=='K'){
+                          csv.push('K');
+                          start = 1;
+                      }
+
+                      start = parseInt(start);
+
+                      for(let i=start; i<=end; i++){
+                          csv.push(i+"");
+                      }
+
+                      return csv;
+
+                  }
+
+                  return string.split(',').map((item)=>{
+                      return item.trim();
+                  });
+
+
+              },
+
+              nl2br(string){
+                  return string.replace(/\n/g, "<br>");
+              },
+
+              loadResources(){
+
+                  gapi.client.sheets.spreadsheets.values.get({
+                      spreadsheetId: this.SPREADSHEET_ID,
+                      range: this.SHEET_RANGE,
+                  }).then((response)=>{
+                      const rows = response.result.values;
+
+                      for(let i =0; i<rows.length; i++){
+                          const row = rows[i];
+
+                          this.resources.push({
+                              name: row[0],
+                              description: this.nl2br(row[1]),
+                              url: row[2],
+                              gradeList: row[3],
+                              grades: this.makeCSV(row[3]),
+                              experienceLevels: this.makeCSV(row[4]).map((level)=>{return level.charAt(0).toUpperCase()+level.substr(1)}),
+                              devices: this.makeCSV(row[5]),
+                              showDescription: false,
+
+                          });
+                      }
+                      this.showAll('grades');
+                      this.showAll('devices');
+                      this.showAll('experienceLevels');
+                  })
+              },
+          },
+      });
+
+  </script>
+
+
+
+<% end %>
+
+

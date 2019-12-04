@@ -1,7 +1,7 @@
 ---
 title: Waltham Codes
-menu_position: 1
 ---
+
 # Waltham Codes
 
 We live in a world surrounded by technology. And we know that whatever field our students choose to go into as adults, their ability to succeed will increasingly hinge on understanding how technology works. To prepare students for the future, every school in Waltham is participating in a coding activity during the weeks of December 9-20.
