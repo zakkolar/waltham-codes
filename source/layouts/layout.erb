@@ -9,6 +9,19 @@
     <title><%= current_page.data.title || "Middleman" %></title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
+    <% if build? %>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154024032-1"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-154024032-1');
+      </script>
+
+    <% end %>
+
     <%= javascript_include_tag "site" %>
   </head>
   <body class="center pt3 bl  br bw5-l bw3-m bw3 b--red"></body>
@@ -54,17 +67,6 @@
           PLtranslation()
       }
   </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <% if build? %>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154024032-1"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'UA-154024032-1');
-  </script>
-
-<% end %>
   </body>
 </html>
