@@ -56,17 +56,21 @@
         <div v-for="resource of filteredResources" :key="resource.url" class="list-complete-item bg-white w-100 w-25-l w-40-m fl b--black-10 ba mv2 pa0">
           <h2 class="tc bg-near-white ph3 pv2 ma0 f3">{{resource.name}}</h2>
           <div class="pa3 lh-copy">
-            <p>Grades: {{resource.gradeList}}</p>
-            <p>Experience levels: {{resource.experienceLevels | csvToList }}</p>
-            <p>Devices: {{resource.devices | csvToList}}</p>
-            <a @click.prevent="resource.showDescription = !resource.showDescription" href="#">
-              <span v-if="resource.showDescription">Hide</span>
-              <span v-else>Show</span>
-              description
-            </a>
-            <transition name="slide-fade">
-              <p v-if="resource.showDescription">{{resource.description}}</p>
-            </transition>
+            <p class="bb pb3 b--black-30">{{resource.description}}</p>
+            <footer>
+              <span class="near-white bg-gray inline-flex items-center ma1 tc br2 pa1">Grades {{resource.gradeList}}</span>
+              <div class="cb">
+                <span v-for="level in resource.experienceLevels" class="near-white  bg-mid-gray inline-flex items-center ma1 tc br2 pa1">{{level}}</span>
+              </div>
+              <div class="cb">
+                <span v-for="device in resource.devices" class="near-white bg-near-black inline-flex items-center ma1 tc br2 pa1">{{device}}</span>
+              </div>
+            </footer>
+
+
+
+
+
 
 
 
