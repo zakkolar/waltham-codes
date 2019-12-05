@@ -5,48 +5,53 @@
 
   <div id="resources" class="ph4 ma0">
     <div v-if="resources.length>0">
-      <div class="w-30-l fl ph2-l">
-        <h2 class="f3">Grade levels:</h2>
-        <div class="pb2">
-          <button v-on:click.prevent="showAll('grades')" class="toggle-choices" v-bind:disabled="tableFilters.grades.length == gradeChoices.length">Select all</button>
-          <button v-on:click.prevent="hideAll('grades')" class="toggle-choices" v-bind:disabled="tableFilters.grades.length == 0">Deselect all</button>
+      <button @click.prevent="showFilters = !showFilters" class="dib mb2 ba b--black-10 bg-white black ph3 pv2"><span v-if="showFilters">Hide</span><span v-else>Show</span> filters</button>
+      <div v-if="showFilters" class="ba-ns b--black-30 flex-ns flex-wrap-ns relative">
+        <button class="bg-white bn absolute top-0 right-0 dib pa3" @click.prevent="showFilters = !showFilters">X</button>
+        <div class="w-30-l fl ph2-l">
+          <h2 class="f3">Grade levels:</h2>
+          <div class="pb2">
+            <button v-on:click.prevent="showAll('grades')" class="toggle-choices" v-bind:disabled="tableFilters.grades.length == gradeChoices.length">Select all</button>
+            <button v-on:click.prevent="hideAll('grades')" class="toggle-choices" v-bind:disabled="tableFilters.grades.length == 0">Deselect all</button>
+          </div>
+          <div class="toggle-group">
+            <label v-for="grade in gradeChoices" class="toggle-control w3 w-10-l" v-bind:class="{'on': tableFilters.grades.includes(grade), 'off':!tableFilters.grades.includes(grade)}">
+              <input type="checkbox"  :value="grade" v-model="tableFilters.grades"> {{grade}}
+            </label>
+          </div>
+
         </div>
-        <div class="toggle-group">
-          <label v-for="grade in gradeChoices" class="toggle-control w3 w-10-l" v-bind:class="{'on': tableFilters.grades.includes(grade), 'off':!tableFilters.grades.includes(grade)}">
-            <input type="checkbox"  :value="grade" v-model="tableFilters.grades"> {{grade}}
-          </label>
+        <div class="w-20-l fl ph2-l">
+          <h2 class="f3">Experience levels:</h2>
+          <div class="pb2">
+            <button v-on:click.prevent="showAll('experienceLevels')" class="toggle-choices" v-bind:disabled="tableFilters.experienceLevels.length == experienceLevelChoices.length">Select all</button>
+            <button v-on:click.prevent="hideAll('experienceLevels')" class="toggle-choices" v-bind:disabled="tableFilters.experienceLevels.length == 0">Deselect all</button>
+          </div>
+          <div class="toggle-group">
+            <label v-for="level in experienceLevelChoices" class="toggle-control w-100" v-bind:class="{'on': tableFilters.experienceLevels.includes(level), 'off':!tableFilters.experienceLevels.includes(level)}">
+              <input type="checkbox" :value="level" v-model="tableFilters.experienceLevels"> {{level}}
+            </label>
+          </div>
+
         </div>
 
+
+        <div class="w-50-l fl ph2-l">
+          <h2 class="f3">Devices:</h2>
+          <div class="pb2">
+            <button v-on:click.prevent="showAll('devices')" class="toggle-choices" v-bind:disabled="tableFilters.devices.length == deviceChoices.length">Select all</button>
+            <button v-on:click.prevent="hideAll('devices')" class="toggle-choices" v-bind:disabled="tableFilters.devices.length == 0">Deselect all</button>
+          </div>
+          <div class="toggle-group">
+            <label v-for="device in deviceChoices" class="toggle-control w4" v-bind:class="{'on': tableFilters.devices.includes(device), 'off':!tableFilters.devices.includes(device)}">
+              <input type="checkbox" :value="device" v-model="tableFilters.devices"> {{device}}
+            </label>
+          </div>
+
+
+        </div>
       </div>
-      <div class="w-20-l fl ph2-l">
-        <h2 class="f3">Experience levels:</h2>
-        <div class="pb2">
-          <button v-on:click.prevent="showAll('experienceLevels')" class="toggle-choices" v-bind:disabled="tableFilters.experienceLevels.length == experienceLevelChoices.length">Select all</button>
-          <button v-on:click.prevent="hideAll('experienceLevels')" class="toggle-choices" v-bind:disabled="tableFilters.experienceLevels.length == 0">Deselect all</button>
-        </div>
-        <div class="toggle-group">
-          <label v-for="level in experienceLevelChoices" class="toggle-control w-100" v-bind:class="{'on': tableFilters.experienceLevels.includes(level), 'off':!tableFilters.experienceLevels.includes(level)}">
-            <input type="checkbox" :value="level" v-model="tableFilters.experienceLevels"> {{level}}
-          </label>
-        </div>
 
-      </div>
-
-
-      <div class="w-50-l fl ph2-l">
-        <h2 class="f3">Devices:</h2>
-        <div class="pb2">
-          <button v-on:click.prevent="showAll('devices')" class="toggle-choices" v-bind:disabled="tableFilters.devices.length == deviceChoices.length">Select all</button>
-          <button v-on:click.prevent="hideAll('devices')" class="toggle-choices" v-bind:disabled="tableFilters.devices.length == 0">Deselect all</button>
-        </div>
-        <div class="toggle-group">
-          <label v-for="device in deviceChoices" class="toggle-control w4" v-bind:class="{'on': tableFilters.devices.includes(device), 'off':!tableFilters.devices.includes(device)}">
-            <input type="checkbox" :value="device" v-model="tableFilters.devices"> {{device}}
-          </label>
-        </div>
-
-
-      </div>
 
 <div class="cb">
 
@@ -66,14 +71,6 @@
                 <span v-for="device in resource.devices" class="near-white bg-near-black inline-flex items-center ma1 tc br2 pa1">{{device}}</span>
               </div>
             </footer>
-
-
-
-
-
-
-
-
 
           </div>
 
@@ -102,6 +99,7 @@
                   SPREADSHEET_ID: '1hkGAHnEjyvnjeSgFTBwBNT4SajbnkbAGd5LqFSqJ_g8',
                   SHEET_RANGE: 'Resources!A2:G',
                   resources: [],
+                  showFilters: false,
                   experienceLevelChoices: ["Beginner", "Intermediate", "Advanced"],
                   tableFilters: {
                       experienceLevels: [],
