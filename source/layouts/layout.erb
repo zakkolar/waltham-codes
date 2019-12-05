@@ -28,7 +28,23 @@
  <div >
 <%
 
-  links = sitemap.resources.find_all{|p| !p.data.menu_position.nil?}.sort_by{|p| p.data.menu_position}
+  sitemap_links_raw = sitemap.resources.find_all{|p| !p.data.menu_position.nil?}
+
+  links = sitemap_links_raw.map {|link| {
+      "title" => link.data.menu_title || link.data.title,
+      "class" =>current_page.path == link.path || current_page.data.menu_parent == link.path ? 'active' : '' ,
+      "path" => "/"+link.path,
+      "menu_position" => link.data.menu_position
+  }} + data.header_links.map{|link|{
+      "title" => link.title,
+      "class" => "",
+      "path" => link.url,
+      "menu_position" => link.menu_position || 1000,
+      "new_window" => link.new_window || false
+  }}
+
+  links = links.sort_by{|p| p["menu_position"]}
+
 
 %>
 
@@ -36,7 +52,7 @@
 
     <div class="links dtc v-mid w-40 tr">
     <% links.slice(0, links.length/2).each do |r| %>
-      <%= link_to r.data.menu_title || r.data.title, "/"+r.path, class: current_page.path == r.path || current_page.data.menu_parent == r.path ? 'active' : ''  %>
+      <%= link_to r["title"], r["path"], {:target=>r["new_window"] ? "_blank":""} %>
     <% end %>
     </div>
   <div class="w-20 tc v-mid dtc">
@@ -46,7 +62,7 @@
     <div class="links dtc v-mid w-40 tl">
 
     <% links.slice(links.length/2, links.length).each do |r| %>
-      <%= link_to r.data.menu_title || r.data.title, "/"+r.path, class: current_page.path == r.path || current_page.data.menu_parent == r.path ? 'active' : ''  %>
+        <%= link_to r["title"], r["path"], {:target=>r["new_window"] ? "_blank":""} %>
     <% end %>
 
     </div>
