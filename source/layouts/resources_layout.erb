@@ -60,9 +60,13 @@
       <transition-group appear name="list-complete" tag="div" class="flex flex-wrap">
         <div v-for="resource of filteredResources" :key="resource.url" class="list-complete-item bg-white w-100 w-25-l w-40-m fl b--black-10 ba mv2 pa0">
           <h2 class="tc bg-near-white ph3 pv2 ma0 f3">{{resource.name}}</h2>
-          <div class="pa3 lh-copy">
-            <p class="bb pb3 b--black-30">{{resource.description}}</p>
-            <footer>
+          <div class="ph3 lh-copy">
+            <div class="bb pb3 b--black-30">
+              <p>{{resource.description}}</p>
+              <a :href="resource.url" target="_blank">Go to {{resource.name}}</a>
+            </div>
+
+            <footer class="pt3">
               <span class="bg-gray tag">Grades {{resource.gradeList}}</span>
               <div class="cb">
                 <span v-for="level in resource.experienceLevels" class="bg-near-black tag">{{level}}</span>
