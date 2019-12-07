@@ -26,6 +26,8 @@ page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
 
+page "activity/*", :layout => :activity_layout
+
 proxy "_redirects", "netlify-redirects", ignore: true
 
 activate :livereload
