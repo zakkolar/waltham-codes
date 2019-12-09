@@ -1,6 +1,9 @@
 ---
 title: Bits and Bricks
 ---
+
+# Bits and Bricks
+
 Bit is a little, very adventurous LEGO® robot, but as with all small creatures, sometimes Bit cannot get its programs right. You can help Bit solve the challenges by figuring out which programs are needed. You do this by creating a sequence of small behavior blocks that tells Bit what to do.
 
 [Click here to play Bits and Bricks](https://www.lego.com/assets/FranchiseSites/Portal/BitsAndBricks2/v10/deploydsd/index.html){: .button .button-block}

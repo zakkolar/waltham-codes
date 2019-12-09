@@ -1,6 +1,9 @@
 ---
 title: Grid Navigation
 ---
+
+# Grid Navigation
+
 Computer scientists spend time breaking problems into smaller problems until all that remains is a list of steps. These steps can be turned into instructions that a computer can understand.
 
 This activity lays a foundation for students to think computationally so that they can eventually solve problems by writing code. We completed the grid navigation activity in class and students were given a take-home version to continue "coding" outside of school. No device is necessary! Scroll down to see the [materials and instructions for the take-home version](#take-home-activity).
