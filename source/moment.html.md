@@ -1,5 +1,5 @@
 ---
-title: Pictures and Tweets
+title: Pictures / Tweets
 menu_position: 20
 ---
 
