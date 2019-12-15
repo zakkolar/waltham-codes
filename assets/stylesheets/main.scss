@@ -83,3 +83,31 @@ nav{
   @extend .near-white, .inline-flex, .items-center, .ma1, .tc, .br2, .pa1;
   cursor: default;
 }
+
+.button{
+  @extend .shadow-4;
+  //background-color: #ffd500;
+  @extend .bg-red, .grow, .no-underline;
+  border-style:solid;
+  border-width:2px;
+  border-color:rgba(#000,0.1);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  //color: rgba(#fff, 0.95);
+  color: white;
+  padding: 0.5em 1em 0.5em 1em;
+
+  &:hover{
+
+    //background-color: lighten(#ffd500, 10%);
+
+    border-color:lighten(rgba(#000,0.1), 10%);
+  }
+
+  &:active{
+    color: rgba(#000, 0.3);
+  }
+
+}

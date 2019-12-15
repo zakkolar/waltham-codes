@@ -1,5 +1,149 @@
 <% wrap_layout :text_layout do  %>
 
+  <h1><%= current_page.data.title %></h1>
+
+  <% if current_page.data.phosphorus %>
+    <div class="projectMaterials">
+      <div id="projectCaption"></div>
+      <div id="projectEmbed"></div>
+    </div>
+
+    <script type="text/javascript">
+      forkphorus();
+    </script>
+
+    <style type="text/css">
+        /* simple element hiding */
+        .hidden {
+            display: none;
+        }
+        /* project ID input */
+        #project-select {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            font-size: 24px;
+            line-height: 32px;
+        }
+        #project-select-input {
+            font-size: inherit;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            width: 50px;
+            flex-grow: 1;
+            text-align: center;
+        }
+        /* project type input */
+        #type-select {
+            width: 100%;
+            text-align: right;
+        }
+        #type-select-input {
+            border: 1px solid #aaa;
+            background-color: #eee;
+        }
+        #type-select-input > option:not([disabled]) {
+            background-color: white;
+        }
+        #type-select-input:hover {
+            border: 1px solid #777;
+        }
+        #type-select-input:active {
+            border: 1px solid #333;
+        }
+        /* progress bar */
+        #progress-bar {
+            position: relative;
+            width: 100%;
+            height: 35px;
+            margin-top: 10px;
+        }
+        #progress-bar-fill {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            background-color: #cde;
+            transition: background-color 0.3s, width 0.3s;
+        }
+        #progress-bar-fill[state=error] {
+            background-color: #eaa;
+        }
+        #progress-bar-fill[state=success] {
+            background-color: #aea;
+        }
+        #progress-bar-text {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        /* asset list */
+        #asset-list-container {
+            margin-top: 10px;
+        }
+        #asset-list .name {
+            font-size: 10px;
+        }
+        #asset-list .preview {
+            max-width: 360px;
+        }
+        #asset-list {
+            text-align: center;
+        }
+        #asset-list:empty:after {
+            content: 'Nothing to preview';
+            font-style: italic;
+        }
+        #asset-list tr:hover td > * {
+            outline: 1px solid black;
+        }
+    </style>
+
+
+
+
+    <div id="progress-bar" class="hidden">
+      <div id="progress-bar-fill"></div>
+      <div id="progress-bar-text"></div>
+    </div>
+
+    <div id="download-link" class="tc mv3"></div>
+
+    <a href="#" id="toggle-continue-working-instructions" class="dn">How can my child  continue working on this project?</a>
+
+    <div id="continue-working-instructions" class="dn">
+      <ol>
+        <li>Click "Download project" above and save the project on your device.</li>
+        <li>Go to the <a href="https://scratch.mit.edu/projects/editor/" target="_blank">Scratch project editor</a>.</li>
+        <li>
+          At the top of the screen, go to File > Load from your computer
+          <img style="max-width:200px;" src="/images/uploads/file_load_from_your_computer.png" alt="screenshot of the Scratch user interface with the file menu and 'Load from your computer' options highlighted">
+        </li>
+        <li>Find the location you saved your project and double click on it.</li>
+        <li>The project will open in the Scratch editor so you can keep working.</li>
+      </ol>
+      <p>If you help your child <a href="https://scratch.mit.edu/join">create a free account on Scratch</a>, they can save any changes they make to their account.</p>
+      <p>If you don't want to create an account, they can save changes directly to their device by going to File > Save to your computer. The next time they want to keep working, they'll need to load the project from the device again (steps 3 and 4 above).</p>
+    </div>
+
+    <script type="text/javascript" src="/javascripts/sb-downloader/jszip.min.js"></script>
+    <script type="text/javascript" src="/javascripts/sb-downloader/loader.js"></script>
+
+    <script type="text/javascript">
+        sbDownloader();
+    </script>
+
+
+
+
+    <% end %>
+
   <%= yield %>
 
 <% end %>

@@ -2,8 +2,6 @@
 title: Number line puzzle
 ---
 
-# Number line puzzle
-
 In this activity, students explore a block-based programming language called <a href='https://snap.berkeley.edu/' target='_blank'>Snap!</a> In this particular programming environment (under development by the <a href='https://www.edc.org/' target='_blank'>Education Development Center)</a>, students are given a set of blocks with which they can add and subtract 3 and 5. They are given a series of puzzles that require them to navigate a number line using only these provided blocks.
 
 ## Visual Programming
