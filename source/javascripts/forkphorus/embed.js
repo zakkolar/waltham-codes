@@ -30,7 +30,7 @@
     var iframe = document.createElement('iframe');
     iframe.setAttribute('allowfullscreen', true);
     iframe.setAttribute('allowtransparency', true);
-    iframe.src = script.src.replace('embed.js', 'embed');
+    iframe.src = script.src.replace('embed.js', 'embed.html');
     if (hasUI) {
         // include enough for controls and the player border
         iframe.width = baseWidth + 2;

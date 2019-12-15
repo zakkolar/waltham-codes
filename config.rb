@@ -26,7 +26,7 @@ page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
 
-page '/javascripts/forkphorus/embed.html', layout: false
+page '/javascripts/forkphorus/embed.html', :directory_index => false
 
 page "activity/*", :layout => :activity_layout
 
