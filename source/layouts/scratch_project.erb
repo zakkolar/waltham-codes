@@ -1,0 +1,23 @@
+<% wrap_layout :text_layout do  %>
+
+  <h1><%= current_page.data.title %></h1>
+
+  <% if current_page.data.phosphorus %>
+    <div class="projectMaterials">
+      <div class="dn" id="projectCaption"></div>
+      <div id="projectEmbed"></div>
+    </div>
+
+    <script type="text/javascript">
+      forkphorus();
+    </script>
+
+
+
+
+
+    <% end %>
+
+  <%= yield %>
+
+<% end %>
