@@ -209,6 +209,9 @@ window.SBDL = (function() {
     function addFile(data) {
       progressHooks.newTask();
       const path = data.md5ext;
+      if(!path){
+        return;
+      }
       return fetch(ASSETS_API.replace('$path', path))
         .then((request) => request.arrayBuffer())
         .then((buffer) => {
