@@ -11,11 +11,13 @@ This activity lays a foundation for students to think computationally so that th
 Students were given a 5x5 grid with a start point, finish point, and obstacles:
 
 
-![5 by 5 navigation grid with images of traffic cones as obstacles for students to avoid. "Start" and "Finish" are labeled in opposite corners.](/images/uploads/unplugged-navigation-grid.jpg){: .img-400}
+![5 by 5 navigation grid with images of traffic cones as obstacles for students to avoid. "Start" and "Finish" are labeled in opposite corners.](/images/uploads/grid-navigation-digital.png){: style='max-width:300px; margin-left: auto; margin-right: auto; display: block;'}
 
-Using cards with different arrows, students worked in groups to create a list of instructions to move from the start to the finish without running into obstacles. They tested their instructions at their own grids and debugged (made changes to solve problems) as necessary.
+Using cards with different arrows, students created a list of instructions to move from the start to the finish without running into obstacles. They tested their instructions at their own grids and debugged (made changes to solve problems) as necessary.
 
-At the end of the class, some groups tested their instructions by navigating a teacher through a large version of the grid with the same configuration.
+At the end of the class, some groups tested their instructions by translating them into [Snap*!*](https://snap.berkeley.edu/){: _target='_blank'} code and running them on a [Finch](https://www.birdbraintechnologies.com/finch/){: target='_blank'} robot.
+
+![Screenshot of a split screen. The left half shows a video feed labeled "Finch Cam" that shows a Finch robot moving through a checkered grid that contains traffic cones and squares labeled "start" and "finish". The right half shows the Snap block-based coding environment with a script consisting of arrows that point up, left, and right.](/images/uploads/finch_grid.jpg)
 
 ## Take-home activity
 

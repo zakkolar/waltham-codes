@@ -4,24 +4,14 @@ title: Number line puzzle
 
 
 <div class=" tc">
-<a href='https://go.edc.org/MW-number-line' class='button button-block tc' target='_blank'>Open puzzle environment</a>
+<a href='https://microworld.edc.org/snap.html#present:Username=zakkolar&ProjectName=math%2BC%20fractions%20number%20line%201' class='button button-block tc' target='_blank'>Open puzzle environment</a>
 </div>
 
 
-<img src="/images/uploads/mw_number_line.gif" style='max-width:400px; margin-left:auto; margin-right: auto; display: block' alt="Animation showing the number line environment. A mouse drags a block labeled +5 and connects it to a stack of various other similarly labeled-blocks. The mouse clicks the stack and an animated number lines simulates jumps of distances that correspond to the stack of blocks.">
-
-
-In this activity, students explore a block-based programming language called <a href='https://snap.berkeley.edu/' target='_blank'>Snap<i>!</i></a> In this particular programming environment, students are given a set of blocks with which they can add and subtract 3 and 5. They are given a series of puzzles that require them to navigate a number line using only these provided blocks.
+In this activity, students explore a block-based programming language called <a href='https://snap.berkeley.edu/' target='_blank'>Snap<i>!</i></a> In this particular programming environment, students are given a set of blocks with which they can add and subtract specific fractions. They are given a series of puzzles that require them to navigate a number line using only these provided blocks. Click "Set 2" under the dinosaur to begin the fraction puzzles. "Set 1" is a review of whole numbers.
 
 This activity is under development by the Education Development Center as part of their [Math + Programming](https://elementarymath.edc.org/programming/) project, funded by the National Science Foundation.
 
-
-<figure>
-<img src="/images/uploads/translate_microworld.png" alt="screenshot of Snap showing arrows pointing to gear icon and language menu item" style='max-width:300px; margin-left:auto; margin-right: auto; display: block'>
-<figcaption>
-To translate activities into Spanish, click the gears, choose <b>Language...</b> and choose <b>Español</b>.
-</figcaption>
-</figure>
 
 ## Visual Programming
 
